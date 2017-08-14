@@ -1,0 +1,13 @@
+// 160x600 Banner
+
+body {
+    @extend %ss-base;
+}
+
+.exit {
+    @extend %ss-base;
+    @include setPosition(absolute, top 0 left 0, 3000);
+    display: block;
+    border: 1px solid $black;
+    background: transparent;
+}

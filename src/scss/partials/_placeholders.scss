@@ -1,0 +1,72 @@
+// PLACEHOLDERS
+
+// extends banner ad dimensions
+%ss-base {
+    width: 160px;
+    height: 600px;
+} // Skyscraper
+
+%mr-base {
+    width: 300px;
+    height: 250px;
+} // Medium Rectangle
+
+%hp-base {
+    width: 300px;
+    height: 600px;
+} // Halfpage
+
+%lb-base {
+    width: 728px;
+    height: 90px;
+} // leaderboard
+
+%lbm-base {
+    width: 320px;
+    height: 50px;
+} // Mobile Leaderboard
+
+%lbms-base {
+    width: 300px;
+    height: 50px;
+} // Small Mobile Leaderboard
+
+%lbl-base {
+    width: 970px;
+    height: 90px;
+} // Large Leaderboard
+
+%bb-base {
+    width: 970px;
+    height: 250px;
+} // Billboard
+
+%pb-base {
+    width: 300px;
+    height: 1050px;
+} // Portrait
+
+%sqr-base {
+    width: 250px;
+    height: 250px;
+} // Square
+
+%sqrs-base {
+    width: 200px;
+    height: 200px;
+} // Small Square
+
+%vb-base {
+    width: 120px;
+    height: 240px;
+} // Vertical
+
+%hem-base {
+    width: 320px;
+    height: 480px;
+} // High-End Mobile
+
+// Text shadow
+%txt-shadow {
+    text-shadow: 0px 0px 3px transparentize($black, 0.55);
+}

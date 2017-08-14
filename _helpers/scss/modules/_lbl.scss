@@ -1,0 +1,13 @@
+// 970x90 Banner
+
+body {
+    @extend %lbl-base;
+}
+
+.exit {
+    @extend %lbl-base;
+    @include setPosition(absolute, top 0 left 0, 3000);
+    display: block;
+    border: 1px solid $black;
+    background: transparent;
+}

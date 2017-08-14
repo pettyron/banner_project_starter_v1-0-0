@@ -1,0 +1,13 @@
+// 300x1050 Banner
+
+body {
+    @extend %pb-base;
+}
+
+.exit {
+    @extend %pb-base;
+    @include setPosition(absolute, top 0 left 0, 3000);
+    display: block;
+    border: 1px solid $black;
+    background: transparent;
+}

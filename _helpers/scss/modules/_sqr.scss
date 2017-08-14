@@ -1,0 +1,13 @@
+// 250x250 Banner
+
+body {
+    @extend %sqr-base;
+}
+
+.exit {
+    @extend %sqr-base;
+    @include setPosition(absolute, top 0 left 0, 3000);
+    display: block;
+    border: 1px solid $black;
+    background: transparent;
+}

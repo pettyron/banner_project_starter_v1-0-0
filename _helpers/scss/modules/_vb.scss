@@ -1,0 +1,13 @@
+// 120x240 Banner
+
+body {
+    @extend %vb-base;
+}
+
+.exit {
+    @extend %vb-base;
+    @include setPosition(absolute, top 0 left 0, 3000);
+    display: block;
+    border: 1px solid $black;
+    background: transparent;
+}

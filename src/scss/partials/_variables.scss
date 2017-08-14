@@ -1,0 +1,17 @@
+//--- Typography ---//
+$base-font: 'Arial', 'Helvetica', sans-serif;
+$base-font-size: 16px;
+$baseline-px: $base-font-size;
+$px-values: ();
+$rem-values: ();
+
+//--- Color ---//
+$white: #fff;
+$black: #000;
+
+//--- Image URLs ---//
+$img-root: "../images/";
+$base-url: "https://myhostco.com/amazon_s3_for_example/"; // The url for your host if you're using one for images
+$base-dir: "base_dir/"; // Any banner set worked with then allows just changing the dir where images live
+
+//--- Sprites | import any sprite variables from Sprity output to this doc --//

@@ -1,0 +1,153 @@
+// mixins
+
+// typography rem mixin
+
+@mixin rem($property, $px-values) {
+    // Convert the baseline into rems
+    $baseline-rem: $baseline-px / 1rem * 1;
+    // Print the first line in pixel values
+    #{$property}: $px-values;
+    // If there is only one (numeric) value, return the property/value line for it.
+    @if type-of($px-values) == "number" {
+        #{$property}: $px-values / $baseline-rem;}
+    @else {
+        // Create an empty list that we can dump values into
+        $rem-values: ();
+        @each $value in $px-values {
+            // If the value is zero or not a number, return it
+            @if $value == 0 or type-of( $value ) != "number" {
+                $rem-values: append($rem-values, $value); }
+            @else {
+                $rem-values: append($rem-values, $value / $baseline-rem);
+            }
+        }
+        // Return the property and its list of converted values
+        #{$property}: $rem-values;
+    }
+}
+
+//*************************************************************************************************
+// Run most used font and text styles with the font mixin.
+// Example usage: @include font($serif, $blue, 12px, 18px, 500, uppercase, inherit);
+// The fontSm and txt mixins are here to take advantage of the cascade. For instance,
+// there are elements that share the same font-family and color but not size, line-height
+// and etc. The fontSm and can be placed on the shared elements and txt can be used
+// to style elements down in the cascade.
+// Then the txt mixin can be used to specify your other needs.
+//
+// Remember there is the font (CSS shorthand property) as well and is just as useful
+// These mixins do what the font propery does with the addition of text-transform, color and rem vals
+//*************************************************************************************************
+
+// Font | Set up so you can use any line-height rule like 1.2 for example
+@mixin font($family, $color: #000, $size: $baseline-px, $ln-height: $size, $weight: normal, $transform: none , $style: normal ) {
+    font-family: $family;
+    color: $color;
+    font-size: $size;
+    line-height: $ln-height;
+    @include rem(font-size, $size);
+    font-weight: $weight;
+    text-transform: $transform;
+    font-style: $style;
+}
+// FontLH | Set up if you prefer using hard line-height sizes and to keep REM units consistent
+@mixin fontLH($family, $color: #000, $size: $baseline-px, $ln-height: $size, $weight: normal, $transform: none , $style: normal ) {
+    font-family: $family;
+    color: $color;
+    font-size: $size;
+    line-height: $ln-height;
+    @include rem(font-size, $size);
+    @include rem(line-height, $ln-height);
+    font-weight: $weight;
+    text-transform: $transform;
+    font-style: $style;
+}
+@mixin fontSm($family, $color: #000) {
+    font-family: $family;
+    color: $color;
+}
+// txt | Set up so you can use any line-height rule like 1.2 for example
+@mixin txt($size: $baseline-px, $ln-height: $size, $weight: normal, $transform: none , $style: normal ) {
+    font-size: $size;
+    line-height: $ln-height;
+    @include rem(font-size, $size);
+    font-weight: $weight;
+    text-transform: $transform;
+    font-style: $style;
+}
+// txtLH | Set up if you prefer using hard line-height sizes and to keep REM units consistent
+@mixin txtLH($size: $baseline-px, $ln-height: $size, $weight: normal, $transform: none , $style: normal ) {
+    font-size: $size;
+    line-height: $ln-height;
+    @include rem(font-size, $size);
+    @include rem(line-height, $ln-height);
+    font-weight: $weight;
+    text-transform: $transform;
+    font-style: $style;
+}
+
+// Usage: @include setPosition(absolute, top 0 left 0, $tenthfloor-z) | z-index is optional as the default is set = 0
+// $coordinates behaves like any other css element that takes direction as its arguments the order is top right bottom left
+// The absoluteXyPos mixin gives just the arguments and z-indexing to take advantage of the cascade.
+
+@mixin setPosition($position, $args: (), $z-indexing: null) {
+    $offsets: top right bottom left;
+    position: $position;
+    z-index: $z-indexing;
+
+    @each $offset in $offsets {
+    $index: index($args, $offset);
+
+        @if $index {
+            @if $index == length($args) {
+                #{$offset}: 0;
+            }
+            @else {
+                $next: nth($args, $index + 1);
+                @if is-valid-length($next) {
+                    #{$offset}: $next;
+                }
+                @else if index($offsets, $next) {
+                    #{$offset}: 0;
+                }
+                @else {
+                    @warn "Invalid value `#{$next}` for offset `#{$offset}`.";
+                }
+            }
+        }
+    }
+}
+
+@mixin absoluteXyPos($args: (), $z-indexing: null) {
+    $offsets: top right bottom left;
+    z-index: $z-indexing;
+
+    @each $offset in $offsets {
+    $index: index($args, $offset);
+
+        @if $index {
+            @if $index == length($args) {
+                #{$offset}: 0;
+            }
+            @else {
+                $next: nth($args, $index + 1);
+                @if is-valid-length($next) {
+                    #{$offset}: $next;
+                }
+                @else if index($offsets, $next) {
+                    #{$offset}: 0;
+                }
+                @else {
+                    @warn "Invalid value `#{$next}` for offset `#{$offset}`.";
+                }
+            }
+        }
+    }
+}
+
+// Sprite Position | Mixin for pushing Sprity generated sprites into position via a variable
+@mixin sprite-position($sprite) {
+  $sprite-offset-x: nth($sprite, 1);
+  $sprite-offset-y: nth($sprite, 2);
+  background-position: $sprite-offset-x $sprite-offset-y;
+}
